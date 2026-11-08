@@ -135,7 +135,9 @@ const mat = new THREE.ShaderMaterial({
     void main(){ vec3 n = normalize(d); float lon = atan(n.x, -n.z); float lat = asin(clamp(n.y, -1.0, 1.0));
       vec2 uv = vec2(0.5 + lon / 6.28318530718, 0.5 + lat / 3.14159265359);
       vec2 g = vec2(0.5 + atan(n.x, n.z) / 6.28318530718, uv.y); // gradiente continuo para el mip-map
-      gl_FragColor = textureGrad(tex, uv, dFdx(g), dFdy(g)); #include <colorspace_fragment> }`
+      gl_FragColor = textureGrad(tex, uv, dFdx(g), dFdy(g));
+      #include <colorspace_fragment>
+    }`
 });
 scene.add(new THREE.Mesh(new THREE.SphereGeometry(10, 96, 64), mat));
 // rumbo (0 = norte, + hacia el este) y cabeceo (+ arriba), en grados; campo de visión vertical
